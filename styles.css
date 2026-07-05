@@ -547,3 +547,227 @@ img {
     align-items: flex-start;
   }
 }
+/* ANIMACIÓN 3D HERO */
+
+.lc3d-scene {
+  min-height: 520px;
+  display: grid;
+  place-items: center;
+  perspective: 1100px;
+  position: relative;
+}
+
+.lc3d-orbit {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  border: 1px solid rgba(103, 232, 249, 0.2);
+  box-shadow:
+    inset 0 0 40px rgba(103, 232, 249, 0.05),
+    0 0 60px rgba(139, 92, 246, 0.08);
+  animation: lcOrbitFloat 8s ease-in-out infinite alternate;
+}
+
+@keyframes lcOrbitFloat {
+  from {
+    transform: rotateX(68deg) rotateZ(0deg) translateY(0);
+  }
+  to {
+    transform: rotateX(68deg) rotateZ(18deg) translateY(-10px);
+  }
+}
+
+.lc3d-device {
+  width: min(100%, 470px);
+  transform-style: preserve-3d;
+  transform: rotateY(-18deg) rotateX(8deg);
+  animation: lcFloatDevice 5.5s ease-in-out infinite alternate;
+  position: relative;
+}
+
+@keyframes lcFloatDevice {
+  from {
+    transform: rotateY(-18deg) rotateX(8deg) translateY(0);
+  }
+  to {
+    transform: rotateY(-10deg) rotateX(3deg) translateY(-18px);
+  }
+}
+
+.lc3d-screen {
+  background:
+    radial-gradient(circle at 80% 10%, rgba(139, 92, 246, 0.18), transparent 35%),
+    linear-gradient(145deg, #0d1726, #050914);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 26px;
+  padding: 20px;
+  min-height: 310px;
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.55),
+    0 0 70px rgba(103, 232, 249, 0.13);
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+.lc3d-screen::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 180deg,
+    transparent,
+    rgba(103, 232, 249, 0.14),
+    transparent,
+    rgba(139, 92, 246, 0.18),
+    transparent
+  );
+  animation: lcRotateGlow 9s linear infinite;
+  z-index: 0;
+}
+
+@keyframes lcRotateGlow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.lc3d-screen-content {
+  position: relative;
+  z-index: 1;
+  background: rgba(5, 9, 20, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 22px;
+  min-height: 270px;
+  transform: translateZ(35px);
+}
+
+.lc3d-mini-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  color: #cbd5e1;
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+
+.lc3d-screen-content h3 {
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 900;
+  margin-bottom: 14px;
+  color: #f8fbff;
+}
+
+.lc3d-screen-content h3 span {
+  background: linear-gradient(90deg, #67e8f9, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lc3d-screen-content p {
+  color: #aab8c7;
+  max-width: 320px;
+  font-size: 0.9rem;
+  margin-bottom: 22px;
+}
+
+.lc3d-screen-content a {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #67e8f9, #8b5cf6);
+  color: #06101d;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.lc3d-floating {
+  position: absolute;
+  z-index: 3;
+  width: 170px;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(17, 29, 45, 0.72);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  transform-style: preserve-3d;
+  animation: lcCardFloat 4.2s ease-in-out infinite alternate;
+}
+
+.lc3d-floating strong {
+  display: block;
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 8px;
+  color: #f8fbff;
+}
+
+.lc3d-floating p {
+  color: #aab8c7;
+  font-size: 0.82rem;
+}
+
+.lc3d-card-one {
+  left: -5px;
+  top: 80px;
+  transform: translateZ(80px) rotateY(18deg);
+}
+
+.lc3d-card-two {
+  right: -5px;
+  bottom: 95px;
+  animation-delay: 1.2s;
+  transform: translateZ(110px) rotateY(-16deg);
+}
+
+@keyframes lcCardFloat {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -18px;
+  }
+}
+
+@media (max-width: 950px) {
+  .lc3d-scene {
+    min-height: 460px;
+  }
+
+  .lc3d-floating {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .lc3d-scene {
+    min-height: 390px;
+  }
+
+  .lc3d-orbit {
+    width: 310px;
+    height: 310px;
+  }
+
+  .lc3d-screen {
+    min-height: 270px;
+  }
+
+  .lc3d-screen-content {
+    min-height: 230px;
+  }
+
+  .lc3d-mini-nav {
+    font-size: 0.62rem;
+  }
+
+  .lc3d-screen-content h3 {
+    font-size: 1.55rem;
+  }
+}
